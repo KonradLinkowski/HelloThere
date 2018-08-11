@@ -17,9 +17,15 @@ function serv(io) {
   chat.on('connection', socket => {
     console.log(`${socket.id} connected`)
 
-    socket.on('login', data => {
+    socket.on('login', (data, fn) => {
       console.log(`${socket.id} logged in`)
-      users.push(new User(socket, data.myGender, data.searchFor))
+      if ((data.myGender === 'male' || data.myGender === 'female')
+        && data.searchFor.length >= 1 && data.searchFor.length <= 2) {
+        users.push(new User(socket, data.myGender, data.searchFor))
+        fn(true)
+      } else {
+        fn(false)
+      }
     })
     socket.on('search', data => {
       console.log(`${socket.id} is looking for someone`)
@@ -30,14 +36,27 @@ function serv(io) {
     socket.on('leave', data => {
       console.log(`${socket.id} left the room`)
       let room = Object.keys(socket.rooms)[1]
+      io.to(room).emit('user-left')
       socket.leave(room)
     })
 
     socket.on('message', (msg, fn) => {
-      console.log(`${socket.id} sent message`)
+      console.log(`${socket.id} sent message: ${msg}`)
       let room = Object.keys(socket.rooms)[1]
       socket.to(room).emit('message', msg)
       fn(msg)
+    })
+
+    socket.on('disconnecting', data => {
+      console.log(`${socket.id} is disconnecting`)
+      let room = Object.keys(socket.rooms)[1]
+      chat.to(room).emit('user-left')
+      // chat.in(room).clients((error, clients) => {
+      //   if (error) throw error;
+      //   for(let i = 0; i < clients.length; i++){
+      //     chat.sockets.connected[clients[i]].leave(room)
+      //   }
+      // });
     })
 
     socket.on('disconnect', data => {
