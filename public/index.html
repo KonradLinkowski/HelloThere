@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>HelloThere</title>
+</head>
+<body>
+  <article id="chat-page" class="chat-page hidden">
+    <div id="chat-box" class="chat-box"></div>
+    <input type="text" id="chat-input" class="chat-input">
+    <button id="chat-send">send</button>
+  </article>
+  <article id="login-page">
+    <fieldset>
+      <legend>Who are you?</legend>
+      <label for="my-female">
+        female
+        <input type="radio" id="my-female" name="my-gender">
+      </label>
+      <label for="my-male">
+        male
+        <input type="radio" id="my-male" name="my-gender">
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>Who are you looking for?</legend>
+      <label for="search-female">
+        female
+        <input type="radio" id="search-female" name="search-gender">
+      </label>
+      <label for="search-male">
+        male
+        <input type="radio" id="search-male" name="search-gender">
+      </label>
+    </fieldset>
+    <button id="search">search</button>
+  </article>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="socket.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
