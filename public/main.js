@@ -5,12 +5,52 @@
   const $chatInput = document.querySelector('#chat-input')
   const $sendBtn = document.querySelector('#chat-send')
   const $searchBtn = document.querySelector('#search')
+  const $leaveBtn = document.querySelector('#chat-leave')
 
   const socket = new Socket('/chat')
+
+  const state = {
+    searching: 0,
+    connected: 1,
+    disconnected: 2
+  }
+  let currentState = {
+    st: state.disconnected,
+    set: value => {
+      st = value
+      if (value == state.searching) {
+        $leaveBtn.innerHTML = 'stop'
+        $sendBtn.disabled = true
+        $chatInput.disabled = true
+      } else if (value == state.connected) {
+        $leaveBtn.innerHTML = 'leave'
+        $sendBtn.disabled = false
+        $chatInput.disabled = false
+        $chatBox.innerHTML = ''
+      } else {
+        $leaveBtn.innerHTML = 'search'
+        $sendBtn.disabled = true
+        $chatInput.disabled = true
+      }
+    },
+    get: () => st
+  }
 
   $searchBtn.addEventListener('click', login)
   $sendBtn.addEventListener('click', e => {
     socket.sendMessage($chatInput.value, msg => printMessage(msg, true))
+  })
+  $leaveBtn.addEventListener('click', e => {
+    if (currentState.get() == state.connected) {
+      socket.leave()
+      currentState.set(state.disconnected)
+    } else if (currentState.get() == state.disconnected) {
+      socket.search(true)
+      currentState.set(state.searching)
+    } else {
+      socket.search(false)
+      currentState.set(state.disconnected)
+    }
   })
   $chatInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
@@ -20,14 +60,16 @@
 
   socket.on('join', data => {
     console.log('joined')
+    currentState.set(state.connected)
   })
 
   socket.on('message', msg => printMessage(msg, false))
   socket.on('user-left', () => {
+    console.log('user left')
     socket.leave()
-    $chatBox.innerHTML = ''
-    $loginPage.setActive(true)
-    $chatPage.setActive(false)
+    currentState.set(state.disconnected)
+    // $loginPage.setActive(true)
+    // $chatPage.setActive(false)
   })
 
   function printMessage(message, you) {
@@ -47,7 +89,8 @@
     }
     socket.login(myGender, searchFor, succes => {
       if (succes) {
-        socket.search()
+        socket.search(true)
+        currentState.set(state.searching)
         $loginPage.setActive(false)
         $chatPage.setActive(true)
       } else {

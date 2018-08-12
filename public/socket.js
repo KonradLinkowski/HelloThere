@@ -41,9 +41,11 @@ class Socket {
 
   /**
    * Starts searching for new user
+   * 
+   * @param {boolean} start true if you want to start, false if stop
    */
-  search() {
-    this.socket.emit('search')
+  search(start) {
+    this.socket.emit('search', start)
   }
 
   /**

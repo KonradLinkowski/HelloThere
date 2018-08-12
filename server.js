@@ -28,15 +28,21 @@ function serv(io) {
       }
     })
     socket.on('search', data => {
-      console.log(`${socket.id} is looking for someone`)
-      const thisUser = users.find(user => user.socket.id == socket.id)
-      chatQueue.push(thisUser)
+      if (data === true) {
+        console.log(`${socket.id} is looking for someone`)
+        const thisUser = users.find(user => user.socket.id == socket.id)
+        chatQueue.push(thisUser)
+      } else {
+        console.log(`${socket.id} stopped looking for someone`)
+        const thisUser = users.find(user => user.socket.id == socket.id)
+        chatQueue.splice(chatQueue.indexOf(thisUser), 1)
+      }
     })
 
     socket.on('leave', data => {
       console.log(`${socket.id} left the room`)
       let room = Object.keys(socket.rooms)[1]
-      io.to(room).emit('user-left')
+      chat.to(room).emit('user-left')
       socket.leave(room)
     })
 
