@@ -27,6 +27,14 @@ function serv(io) {
         fn(false)
       }
     })
+
+    socket.on('logout', () => {
+      console.log(`${socket.id} logged out`)
+      let thisUser = users.find(u => u.socket.id == socket.id)
+      if (!thisUser) return
+      users.splice(users.indexOf(thisUser))
+    })
+
     socket.on('search', data => {
       if (data === true) {
         console.log(`${socket.id} is looking for someone`)

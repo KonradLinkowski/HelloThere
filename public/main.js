@@ -6,6 +6,7 @@
   const $sendBtn = document.querySelector('#chat-send')
   const $searchBtn = document.querySelector('#search')
   const $leaveBtn = document.querySelector('#chat-leave')
+  const $logoutBtn = document.querySelector('#chat-logout')
 
   const socket = new Socket('/chat')
 
@@ -22,15 +23,18 @@
         $leaveBtn.innerHTML = 'stop'
         $sendBtn.disabled = true
         $chatInput.disabled = true
+        $logoutBtn.disabled = true
       } else if (value == state.connected) {
         $leaveBtn.innerHTML = 'leave'
         $sendBtn.disabled = false
         $chatInput.disabled = false
+        $logoutBtn.disabled = true
         $chatBox.innerHTML = ''
       } else {
         $leaveBtn.innerHTML = 'search'
         $sendBtn.disabled = true
         $chatInput.disabled = true
+        $logoutBtn.disabled = false
       }
     },
     get: () => st
@@ -39,6 +43,12 @@
   $searchBtn.addEventListener('click', login)
   $sendBtn.addEventListener('click', e => {
     socket.sendMessage($chatInput.value, msg => printMessage(msg, true))
+  })
+  $logoutBtn.addEventListener('click', e => {
+    socket.leave()
+    currentState.set(state.disconnected)
+    $loginPage.setActive(true)
+    $chatPage.setActive(false)
   })
   $leaveBtn.addEventListener('click', e => {
     if (currentState.get() == state.connected) {

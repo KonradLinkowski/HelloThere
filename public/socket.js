@@ -30,6 +30,13 @@ class Socket {
   }
 
   /**
+   * Logs user out
+   */
+  logout() {
+    this.socket.emit('logout')
+  }
+
+  /**
    * Sends message to a current connected user
    * 
    * @param {string} message your message
