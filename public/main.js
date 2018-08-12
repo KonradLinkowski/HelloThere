@@ -83,9 +83,7 @@
   })
 
   function printMessage(message, you) {
-    let mes = document.createElement('p')
-    mes.innerHTML = (you ? 'You: ' : 'Stranger: ') + message
-    $chatBox.appendChild(mes)
+    $chatBox.appendChild(createMessageElement(message, you))
   }
 
   function login() {
@@ -107,6 +105,17 @@
         console.log('Login failure')
       }
     })
+  }
+
+  function createMessageElement(message, you) {
+    let wrapper = document.createElement('div')
+    wrapper.classList.add('message-wrapper')
+    wrapper.classList.add(you ? 'message-wrapper--left' : 'message-wrapper--right')
+    let mes = document.createElement('span')
+    mes.classList.add('message')
+    mes.innerText = message
+    wrapper.appendChild(mes)
+    return wrapper
   }
 })()
 
