@@ -8,13 +8,17 @@
 </head>
 <body>
   <article id="chat-page" class="chat-page hidden">
-    <div id="chat-box" class="chat-box"></div>
-    <button id="chat-logout">change preferences</button>
-    <button id="chat-leave">leave</button>
-    <input type="text" id="chat-input" class="chat-input">
-    <button id="chat-send">send</button>
+    <div class="chat-wrapper">
+      <div id="chat-box" class="chat-box"></div>
+      <div class="buttons-wrapper">
+        <button id="chat-logout" class="btn">change preferences</button>
+        <button id="chat-leave" class="btn">leave</button>
+        <input type="text" id="chat-input" class="chat-input" autofocus>
+        <button id="chat-send" class="btn">send</button>
+      </div>
+    </div>
   </article>
-  <article id="login-page">
+  <article id="login-page" class="login-page">
     <fieldset>
       <legend>Who are you?</legend>
       <label for="my-female">
