@@ -56,9 +56,12 @@ function serv(io) {
 
     socket.on('message', (msg, fn) => {
       console.log(`${socket.id} sent message: ${msg}`)
+      if (msg === '') {
+        return fn({ error: true })
+      }
       let room = Object.keys(socket.rooms)[1]
-      socket.to(room).emit('message', msg)
-      fn(msg)
+      socket.to(room).emit('message', { error: false, msg: msg })
+      fn({ error: false, msg: msg })
     })
 
     socket.on('disconnecting', data => {

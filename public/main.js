@@ -42,8 +42,7 @@
 
   $searchBtn.addEventListener('click', login)
   $sendBtn.addEventListener('click', e => {
-    socket.sendMessage($chatInput.value, msg => printMessage(msg, true))
-    $chatInput.value = ''
+    sendMessage()
   })
   $logoutBtn.addEventListener('click', e => {
     socket.leave()
@@ -65,8 +64,7 @@
   })
   $chatInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
-      socket.sendMessage($chatInput.value, msg => printMessage(msg, true))
-      $chatInput.value = ''
+      sendMessage()
     }
   })
 
@@ -84,9 +82,20 @@
     // $chatPage.setActive(false)
   })
 
-  function printMessage(message, you) {
-    $chatBox.appendChild(createMessageElement(message, you))
+  function printMessage(data, you) {
+    if (data.error) {
+      return
+    }
+    $chatBox.appendChild(createMessageElement(data.msg, you))
     $chatBox.scrollTop = $chatBox.scrollHeight
+  }
+
+  function sendMessage() {
+    if ($chatInput.value === '') {
+      return
+    }
+    socket.sendMessage($chatInput.value, msg => printMessage(msg, true))
+    $chatInput.value = ''
   }
 
   function login() {
