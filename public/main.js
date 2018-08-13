@@ -86,6 +86,7 @@
 
   function printMessage(message, you) {
     $chatBox.appendChild(createMessageElement(message, you))
+    $chatBox.scrollTop = $chatBox.scrollHeight
   }
 
   function login() {
