@@ -43,6 +43,7 @@
   $searchBtn.addEventListener('click', login)
   $sendBtn.addEventListener('click', e => {
     socket.sendMessage($chatInput.value, msg => printMessage(msg, true))
+    $chatInput.value = ''
   })
   $logoutBtn.addEventListener('click', e => {
     socket.leave()
@@ -65,6 +66,7 @@
   $chatInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       socket.sendMessage($chatInput.value, msg => printMessage(msg, true))
+      $chatInput.value = ''
     }
   })
 
