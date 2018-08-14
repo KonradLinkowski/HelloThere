@@ -124,6 +124,7 @@
     wrapper.classList.add(you ? 'message-wrapper--left' : 'message-wrapper--right')
     let mes = document.createElement('span')
     mes.classList.add('message')
+    mes.classList.add(you ? 'message--left' : 'message--right')
     mes.innerText = message
     wrapper.appendChild(mes)
     return wrapper

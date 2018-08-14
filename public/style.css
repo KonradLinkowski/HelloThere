@@ -54,11 +54,20 @@ body {
 }
 
 .message {
-  max-width: 60%;
-  background-color: lightsalmon;
-  border-radius: 10px;
-  padding: 1% 2%;
+  max-width: 90%;
+  border-radius: 20px;
+  padding: 5px 10px;
   word-wrap:  break-word;
+}
+
+.message--left {
+  background-color: lightsalmon;
+  color: white;
+}
+
+.message--right {
+  background-color: #e9ebee;
+  color: black;
 }
 
 .hidden {
