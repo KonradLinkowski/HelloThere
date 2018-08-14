@@ -46,6 +46,7 @@
   })
   $logoutBtn.addEventListener('click', e => {
     socket.leave()
+    socket.logout()
     currentState.set(state.disconnected)
     $loginPage.setActive(true)
     $chatPage.setActive(false)
@@ -99,8 +100,6 @@
   }
 
   function login() {
-    const $myGender = document.querySelector('#my-gender')
-    const $searchGender = document.querySelector('#search-gender')
     const myGender = document.querySelector('input[name=my-gender]:checked').dataset.gender
     const checkboxes = document.querySelectorAll('input[name=search-gender]:checked')
     const searchFor = []
