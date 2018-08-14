@@ -45,7 +45,8 @@ function handleConnection(socket) {
     if (data === true) {
       console.log(`${socket.id} is looking for someone`)
       const thisUser = users.find(user => user.socket.id == socket.id)
-      chatQueue.push(thisUser)
+      if (thisUser)
+        chatQueue.push(thisUser)
     } else {
       console.log(`${socket.id} stopped looking for someone`)
       const thisUser = users.find(user => user.socket.id == socket.id)
@@ -61,13 +62,14 @@ function handleConnection(socket) {
   })
 
   socket.on('message', (msg, fn) => {
-    console.log(`${socket.id} sent message: ${msg}`)
-    if (msg === '') {
+    let message = msg.trim()
+    console.log(`${socket.id} sent message: ${message}`)
+    if (message === '' || message.length > 1024) {
       return fn({ error: true })
     }
     let room = Object.keys(socket.rooms)[1]
-    socket.to(room).emit('message', { error: false, msg: msg })
-    fn({ error: false, msg: msg })
+    socket.to(room).emit('message', { error: false, msg: message })
+    fn({ error: false, msg: message })
   })
 
   socket.on('disconnecting', data => {
