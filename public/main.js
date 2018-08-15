@@ -132,10 +132,10 @@
   function createMessageElement(message, you) {
     let wrapper = document.createElement('div')
     wrapper.classList.add('message-wrapper')
-    wrapper.classList.add(you ? 'message-wrapper--left' : 'message-wrapper--right')
+    wrapper.classList.add(you ? 'message-wrapper--right' : 'message-wrapper--left')
     let mes = document.createElement('span')
     mes.classList.add('message')
-    mes.classList.add(you ? 'message--left' : 'message--right')
+    mes.classList.add(you ? 'message--right' : 'message--left')
     mes.innerText = message
     wrapper.appendChild(mes)
     return wrapper

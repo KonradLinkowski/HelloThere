@@ -64,13 +64,13 @@ body {
 }
 
 .message--left {
-  background-color: lightsalmon;
-  color: white;
+  background-color: #e9ebee;
+  color: black;
 }
 
 .message--right {
-  background-color: #e9ebee;
-  color: black;
+  background-color: lightsalmon;
+  color: white;
 }
 
 .hidden {
