@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --chat-color: lightsalmon;
+  --chat-padding: 5%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -18,6 +23,13 @@ body {
   right: 0;
 }
 
+.chat-info {
+  height: 2rem;
+  padding: 0 var(--chat-padding);
+  background-color: var(--chat-color);
+  color: white;
+}
+
 .chat-wrapper {
   height: 100%;
   display: flex;
@@ -27,7 +39,7 @@ body {
 .chat-box {
   height: 100%;
   width: 100%;
-  padding: 5%;
+  padding: 0 var(--chat-padding);
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -69,7 +81,7 @@ body {
 }
 
 .message--right {
-  background-color: lightsalmon;
+  background-color: var(--chat-color);
   color: white;
 }
 
