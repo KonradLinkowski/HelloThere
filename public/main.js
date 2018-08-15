@@ -42,6 +42,8 @@
     get: () => st
   }
 
+  let typingTimeout = null
+
   $searchBtn.addEventListener('click', login)
   $sendBtn.addEventListener('click', e => {
     sendMessage()
@@ -78,8 +80,9 @@
   })
 
   socket.on('typing', () => {
+    if (typingTimeout) clearTimeout(typingTimeout)
     $typingInfo.setActive(true)
-    setTimeout(() => {
+    typingTimeout = setTimeout(() => {
       $typingInfo.setActive(false)
     }, 5000)
   })
@@ -94,6 +97,7 @@
   })
 
   function printMessage(data, you) {
+    if (typingTimeout) clearTimeout(typingTimeout)
     $typingInfo.setActive(false)
     if (data.error) {
       return
