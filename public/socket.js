@@ -37,6 +37,13 @@ class Socket {
   }
 
   /**
+   * Sends information that user is typing
+   */
+  typing() {
+    this.socket.emit('typing')
+  }
+
+  /**
    * Sends message to a current connected user
    * 
    * @param {string} message your message

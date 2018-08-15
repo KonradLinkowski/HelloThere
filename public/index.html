@@ -9,7 +9,11 @@
 <body>
   <article id="chat-page" class="chat-page hidden">
     <div class="chat-wrapper">
-      <div id="chat-box" class="chat-box"></div>
+      <div id="chat-box" class="chat-box">
+        <div id="typing-info" class="message-wrapper message-wrapper--right typing-wrapper hidden">
+          <span class="message message--right typing">...</span>
+        </div>
+      </div>
       <div class="buttons-wrapper">
         <button id="chat-logout" class="btn">change preferences</button>
         <button id="chat-leave" class="btn">leave</button>
