@@ -7,6 +7,7 @@
   const $searchBtn = document.querySelector('#search')
   const $leaveBtn = document.querySelector('#chat-leave')
   const $logoutBtn = document.querySelector('#chat-logout')
+  const $typingInfo = document.querySelector('#typing-info')
 
   const socket = new Socket('/chat')
 
@@ -30,6 +31,7 @@
         $chatInput.disabled = false
         $logoutBtn.disabled = true
         $chatBox.innerHTML = ''
+        $chatBox.appendChild($typingInfo)
       } else {
         $leaveBtn.innerHTML = 'search'
         $sendBtn.disabled = true
@@ -64,6 +66,7 @@
     }
   })
   $chatInput.addEventListener('keydown', e => {
+    socket.typing()
     if (e.key === 'Enter') {
       sendMessage()
     }
@@ -72,6 +75,13 @@
   socket.on('join', data => {
     console.log('joined')
     currentState.set(state.connected)
+  })
+
+  socket.on('typing', () => {
+    $typingInfo.setActive(true)
+    setTimeout(() => {
+      $typingInfo.setActive(false)
+    }, 5000)
   })
 
   socket.on('message', msg => printMessage(msg, false))
@@ -84,10 +94,11 @@
   })
 
   function printMessage(data, you) {
+    $typingInfo.setActive(false)
     if (data.error) {
       return
     }
-    $chatBox.appendChild(createMessageElement(data.msg, you))
+    $chatBox.insertBefore(createMessageElement(data.msg, you), $typingInfo)
     $chatBox.scrollTop = $chatBox.scrollHeight
   }
 
