@@ -11,8 +11,8 @@
   <article id="chat-page" class="chat-page hidden">
     <div class="chat-wrapper">
       <div id="chat-info" class="chat-info">
-        <span id="info-gender">Female</span>
-        <span id="info-users">999</span>
+        <span id="info-gender">female</span>
+        <span id="info-users">{{ userCount }}</span>
       </div>
       <div id="chat-box" class="chat-box">
         <div id="typing-info" class="message-wrapper message-wrapper--left typing-wrapper hidden">
@@ -28,35 +28,37 @@
           <i id="action-search" class="material-icons">search</i>
           <i id="action-stop" class="material-icons">stop</i>
         </button>
-        <input type="text" id="chat-input" class="chat-input" maxlength="1024" placeholder="Say something :)" autofocus>
+        <input type="text" id="chat-input" class="chat-input" maxlength="1024" placeholder="{{ saySomething }}" autofocus>
         <button id="chat-send" class="btn"><i class="material-icons">send</i></button>
       </div>
     </div>
   </article>
   <article id="login-page" class="login-page">
     <fieldset>
-      <legend>Who are you?</legend>
+      <legend>{{ whoAreYou }}</legend>
       <label for="my-female">
-        female
+        {{ female }}
         <input type="radio" id="my-female" name="my-gender" data-gender="female" checked>
       </label>
       <label for="my-male">
-        male
+        {{ male }}
         <input type="radio" id="my-male" name="my-gender" data-gender="male">
       </label>
     </fieldset>
     <fieldset>
-      <legend>Who are you looking for?</legend>
+      <legend>{{ whoAreYouLookingFor }}</legend>
       <label for="search-female">
-        female
+        {{ female }}
         <input type="checkbox" id="search-female" name="search-gender" data-gender="female">
       </label>
       <label for="search-male">
-        male
+        {{ male }}
         <input type="checkbox" id="search-male" name="search-gender" data-gender="male" checked>
       </label>
     </fieldset>
-    <button id="search">search</button>
+    <button id="search">
+    <i class="material-icons">search</i>
+    </button>
   </article>
   <script src="/socket.io/socket.io.js"></script>
   <script src="socket.js"></script>
