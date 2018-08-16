@@ -5,9 +5,12 @@
   const $chatInput = document.querySelector('#chat-input')
   const $sendBtn = document.querySelector('#chat-send')
   const $searchBtn = document.querySelector('#search')
-  const $leaveBtn = document.querySelector('#chat-leave')
   const $logoutBtn = document.querySelector('#chat-logout')
   const $typingInfo = document.querySelector('#typing-info')
+  const $actionBtn = document.querySelector('#chat-action')
+  const $leave = $actionBtn.querySelector('#action-leave'),
+        $search = $actionBtn.querySelector('#action-search'),
+        $stop =  $actionBtn.querySelector('#action-stop')
 
   const socket = new Socket('/chat')
 
@@ -21,19 +24,25 @@
     set: value => {
       st = value
       if (value == state.searching) {
-        $leaveBtn.innerHTML = 'stop'
+        $stop.setActive(true)
+        $leave.setActive(false)
+        $search.setActive(false)
         $sendBtn.disabled = true
         $chatInput.disabled = true
         $logoutBtn.disabled = true
       } else if (value == state.connected) {
-        $leaveBtn.innerHTML = 'leave'
+        $stop.setActive(false)
+        $leave.setActive(true)
+        $search.setActive(false)
         $sendBtn.disabled = false
         $chatInput.disabled = false
         $logoutBtn.disabled = true
         $chatBox.innerHTML = ''
         $chatBox.appendChild($typingInfo)
       } else {
-        $leaveBtn.innerHTML = 'search'
+        $stop.setActive(false)
+        $leave.setActive(false)
+        $search.setActive(true)
         $sendBtn.disabled = true
         $chatInput.disabled = true
         $logoutBtn.disabled = false
@@ -55,7 +64,7 @@
     $loginPage.setActive(true)
     $chatPage.setActive(false)
   })
-  $leaveBtn.addEventListener('click', e => {
+  $actionBtn.addEventListener('click', e => {
     if (currentState.get() == state.connected) {
       socket.leave()
       currentState.set(state.disconnected)
