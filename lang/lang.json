@@ -1,0 +1,22 @@
+{
+    "female": {
+        "pl": "kobieta",
+        "en": "female"
+    },
+    "male": {
+        "pl": "meżczyzna",
+        "en": "male"
+    },
+    "whoAreYou": {
+        "pl": "Kim jesteś?",
+        "en": "Who are you?"
+    },
+    "whoAreYouLookingFor": {
+        "pl": "Kogo szukasz?",
+        "en": "Who are you looking for?"
+    },
+    "saySomething": {
+        "pl": "Napisz coś :)",
+        "en": "Say something :)"
+    }
+}
