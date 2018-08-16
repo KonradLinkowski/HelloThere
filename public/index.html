@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <title>HelloThere</title>
 </head>
@@ -19,10 +20,16 @@
         </div>
       </div>
       <div class="buttons-wrapper">
-        <button id="chat-logout" class="btn">change preferences</button>
-        <button id="chat-leave" class="btn">leave</button>
+        <button id="chat-logout" class="btn">
+          <i class="material-icons">settings</i>
+        </button>
+        <button id="chat-action" class="btn">
+          <i id="action-leave" class="material-icons">close</i>
+          <i id="action-search" class="material-icons">search</i>
+          <i id="action-stop" class="material-icons">stop</i>
+        </button>
         <input type="text" id="chat-input" class="chat-input" maxlength="1024" placeholder="Say something :)" autofocus>
-        <button id="chat-send" class="btn">send</button>
+        <button id="chat-send" class="btn"><i class="material-icons">send</i></button>
       </div>
     </div>
   </article>
