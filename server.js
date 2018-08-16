@@ -18,6 +18,10 @@ let chat = null
 function serv(io) {
   chat = io.of('/chat')
   chat.on('connection', handleConnection)
+  return {
+    getUserCount: () => users.length,
+    getQueueLength: () => chatQueue.length
+  }
 }
 
 function handleConnection(socket) {
