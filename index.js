@@ -12,7 +12,7 @@ const lang = require('./lang/lang')
 
 const port = process.env.PORT || 3000
 
-require('./server')(io)
+const socket = require('./server')(io)
 
 server.listen(port, () => {
   console.log(`Server port: ${port}`)
@@ -29,7 +29,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
   res.render('main', {
-    userCount: 999,
+    userCount: socket.getUserCount(),
     whoAreYou: lang.whoAreYou[req.locale],
     whoAreYouLookingFor: lang.whoAreYouLookingFor[req.locale],
     female: lang.female[req.locale],
