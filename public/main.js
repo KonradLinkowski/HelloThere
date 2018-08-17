@@ -53,6 +53,9 @@
 
   let typingTimeout = null
 
+  $chatBox.addEventListener('click', () => {
+    $chatInput.focus()
+  })
   $searchBtn.addEventListener('click', login)
   $sendBtn.addEventListener('click', e => {
     sendMessage()
@@ -86,6 +89,7 @@
   socket.on('join', data => {
     console.log('joined')
     currentState.set(state.connected)
+    $chatInput.focus()
   })
 
   socket.on('typing', () => {
