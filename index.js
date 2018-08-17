@@ -34,6 +34,10 @@ app.get('/', (req, res) => {
     whoAreYouLookingFor: lang.whoAreYouLookingFor[req.locale],
     female: lang.female[req.locale],
     male: lang.male[req.locale],
-    saySomething: lang.saySomething[req.locale]
+    saySomething: lang.saySomething[req.locale],
+    vars: {
+      title: lang.title[req.locale],
+      titleMessage: lang.titleMessage[req.locale]
+    }
   })
 })

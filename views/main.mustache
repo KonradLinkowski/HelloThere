@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <title>HelloThere</title>
+  <title>{{ title }}</title>
 </head>
 <body>
   <article id="chat-page" class="chat-page hidden">
@@ -60,6 +60,12 @@
     <i class="material-icons">search</i>
     </button>
   </article>
+  <script>
+    window.rendVars = {
+      title: "{{ vars.title }}",
+      titleMessage: "{{ vars.titleMessage }}"
+    }
+  </script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="socket.js"></script>
   <script src="main.js"></script>

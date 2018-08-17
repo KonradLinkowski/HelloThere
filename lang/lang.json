@@ -18,5 +18,13 @@
     "saySomething": {
         "pl": "Napisz coś :)",
         "en": "Say something :)"
+    },
+    "title": {
+        "pl": "Hello There",
+        "en": "Hello There"
+    },
+    "titleMessage": {
+        "pl": "Masz nową wiadomość",
+        "en": "You have a new message"
     }
 }
