@@ -52,6 +52,15 @@
   }
 
   let typingTimeout = null
+  let messageInterval = null
+
+  window.addEventListener('focus', () => {
+    if (messageInterval) {
+      document.title = window.rendVars.title
+      clearInterval(messageInterval)
+      messageInterval = null
+    }
+  })
 
   $chatBox.addEventListener('click', () => {
     $chatInput.focus()
@@ -100,7 +109,17 @@
     }, 5000)
   })
 
-  socket.on('message', msg => printMessage(msg, false))
+  socket.on('message', msg => {
+    if (typingTimeout) {
+      clearTimeout(typingTimeout)
+      $typingInfo.setActive(false)
+      typingTimeout = null
+    }
+    if (!document.hasFocus()) {
+      messageInterval = setInterval(blinkTitle, 3000, 1500)
+    }
+    printMessage(msg, false)
+  })
   socket.on('user-left', () => {
     console.log('user left')
     socket.leave()
@@ -110,8 +129,6 @@
   })
 
   function printMessage(data, you) {
-    if (typingTimeout) clearTimeout(typingTimeout)
-    $typingInfo.setActive(false)
     if (data.error) {
       return
     }
@@ -144,6 +161,13 @@
         console.log('Login failure')
       }
     })
+  }
+
+  function blinkTitle(int) {
+    document.title = window.rendVars.titleMessage
+    setTimeout(() => {
+      document.title = window.rendVars.title
+    }, int)
   }
 
   function createMessageElement(message, you) {
