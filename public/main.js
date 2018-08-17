@@ -89,9 +89,15 @@
     }
   })
   $chatInput.addEventListener('keydown', e => {
-    socket.typing()
+    socket.typing(true)
     if (e.key === 'Enter') {
       sendMessage()
+    }
+  })
+
+  $chatInput.addEventListener('keyup', e => {
+    if ($chatInput.value === '') {
+      socket.typing(false)
     }
   })
 
@@ -101,12 +107,20 @@
     $chatInput.focus()
   })
 
-  socket.on('typing', () => {
-    if (typingTimeout) clearTimeout(typingTimeout)
-    $typingInfo.setActive(true)
-    typingTimeout = setTimeout(() => {
-      $typingInfo.setActive(false)
-    }, 5000)
+  socket.on('typing', start => {
+    if (start) {
+      if (typingTimeout) clearTimeout(typingTimeout)
+      $typingInfo.setActive(true)
+      typingTimeout = setTimeout(() => {
+        $typingInfo.setActive(false)
+      }, 5000)
+    } else {
+      if (typingTimeout) {
+        clearTimeout(typingTimeout)
+        $typingInfo.setActive(false)
+        typingTimeout = null
+      }
+    }
   })
 
   socket.on('message', msg => {

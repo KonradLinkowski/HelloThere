@@ -65,9 +65,9 @@ function handleConnection(socket) {
     socket.leave(room)
   })
 
-  socket.on('typing', () => {
+  socket.on('typing', start => {
     let room = Object.keys(socket.rooms)[1]
-    socket.to(room).emit('typing')
+    socket.to(room).emit('typing', start)
   })
 
   socket.on('message', (msg, fn) => {

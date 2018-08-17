@@ -38,9 +38,11 @@ class Socket {
 
   /**
    * Sends information that user is typing
+   * 
+   * @param {boolean} start started or stopped typing
    */
-  typing() {
-    this.socket.emit('typing')
+  typing(start) {
+    this.socket.emit('typing', start)
   }
 
   /**
