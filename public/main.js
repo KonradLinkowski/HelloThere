@@ -105,6 +105,14 @@
     console.log('joined')
     currentState.set(state.connected)
     $chatInput.focus()
+    printMessage({
+      msg: `${window.rendVars.connectedMessage} ${data.gender}`,
+      error: false
+    }, false)
+    printMessage({
+      msg: window.rendVars.sayHello,
+      error: false
+    }, false)
   })
 
   socket.on('typing', start => {

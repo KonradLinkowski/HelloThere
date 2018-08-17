@@ -26,5 +26,13 @@
     "titleMessage": {
         "pl": "Masz nową wiadomość",
         "en": "You have a new message"
+    },
+    "connectedMessage": {
+        "pl": "Połączyłeś się z",
+        "en": "You connected with"
+    },
+    "sayHello": {
+        "pl": "Przywitaj się :)",
+        "en": "Say hello :)"
     }
 }

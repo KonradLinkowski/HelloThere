@@ -37,7 +37,9 @@ app.get('/', (req, res) => {
     saySomething: lang.saySomething[req.locale],
     vars: {
       title: lang.title[req.locale],
-      titleMessage: lang.titleMessage[req.locale]
+      titleMessage: lang.titleMessage[req.locale],
+      connectedMessage: lang.connectedMessage[req.locale],
+      sayHello: lang.sayHello[req.locale]
     }
   })
 })

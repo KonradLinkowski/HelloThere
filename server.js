@@ -120,8 +120,8 @@ function matchUsers() {
     let roomName = thisUser.socket.id + otherUser.socket.id
     thisUser.socket.join(roomName)
     otherUser.socket.join(roomName)
-    thisUser.socket.emit('join')
-    otherUser.socket.emit('join')
+    thisUser.socket.emit('join', { gender: otherUser.gender })
+    otherUser.socket.emit('join', { gender: thisUser.gender })
     chatQueue.splice(chatQueue.indexOf(thisUser), 1)
     chatQueue.splice(chatQueue.indexOf(otherUser), 1)
     return
