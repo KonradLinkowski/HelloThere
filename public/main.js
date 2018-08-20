@@ -109,11 +109,11 @@
     printMessage({
       msg: `${window.rendVars.connectedMessage} ${data.gender}`,
       error: false
-    }, false)
+    }, false, true)
     printMessage({
       msg: window.rendVars.sayHello,
       error: false
-    }, false)
+    }, false, true)
   })
 
   socket.on('typing', start => {
@@ -155,11 +155,15 @@
     // $chatPage.setActive(false)
   })
 
-  function printMessage(data, you) {
+  function printMessage(data, you, system = false) {
     if (data.error) {
       return
     }
-    $chatBox.insertBefore(createMessageElement(data.msg, you), $typingInfo)
+    if (system) {
+      $chatBox.insertBefore(createSystemMessageElement(data.msg), $typingInfo)
+    } else {
+      $chatBox.insertBefore(createMessageElement(data.msg, you), $typingInfo)
+    }
     $chatBox.scrollTop = $chatBox.scrollHeight
   }
 
@@ -204,6 +208,16 @@
     let mes = document.createElement('span')
     mes.classList.add('message')
     mes.classList.add(you ? 'message--right' : 'message--left')
+    mes.innerText = message
+    wrapper.appendChild(mes)
+    return wrapper
+  }
+
+  function createSystemMessageElement(message) {
+    let wrapper = document.createElement('div')
+    wrapper.classList.add('message-wrapper')
+    let mes = document.createElement('span')
+    mes.classList.add('message-system')
     mes.innerText = message
     wrapper.appendChild(mes)
     return wrapper

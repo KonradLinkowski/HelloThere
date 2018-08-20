@@ -68,6 +68,10 @@ body {
   flex: 1;
 }
 
+.message-system {
+  color: black;
+}
+
 .message {
   max-width: 90%;
   border-radius: 20px;
