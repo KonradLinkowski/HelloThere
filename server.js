@@ -70,6 +70,11 @@ function handleConnection(socket) {
     socket.to(room).emit('typing', start)
   })
 
+  socket.on('read', () => {
+    let room = Object.keys(socket.rooms)[1]
+    socket.to(room).emit('read')
+  })
+
   socket.on('message', (msg, fn) => {
     let message = msg.trim()
     console.log(`${socket.id} sent message: ${message}`)
