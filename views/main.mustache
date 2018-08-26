@@ -34,31 +34,33 @@
     </div>
   </article>
   <article id="login-page" class="login-page">
-    <fieldset>
-      <legend>{{ whoAreYou }}</legend>
-      <label for="my-female">
-        {{ female }}
-        <input type="radio" id="my-female" name="my-gender" data-gender="female" checked>
-      </label>
-      <label for="my-male">
-        {{ male }}
-        <input type="radio" id="my-male" name="my-gender" data-gender="male">
-      </label>
-    </fieldset>
-    <fieldset>
-      <legend>{{ whoAreYouLookingFor }}</legend>
-      <label for="search-female">
-        {{ female }}
-        <input type="checkbox" id="search-female" name="search-gender" data-gender="female">
-      </label>
-      <label for="search-male">
-        {{ male }}
-        <input type="checkbox" id="search-male" name="search-gender" data-gender="male" checked>
-      </label>
-    </fieldset>
-    <button id="search">
-    <i class="material-icons">search</i>
-    </button>
+    <div class="login-wrapper">
+      <fieldset>
+        <legend>{{ whoAreYou }}</legend>
+        <label for="my-female">
+          {{ female }}
+          <input type="radio" id="my-female" name="my-gender" data-gender="female" checked>
+        </label>
+        <label for="my-male">
+          {{ male }}
+          <input type="radio" id="my-male" name="my-gender" data-gender="male">
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>{{ whoAreYouLookingFor }}</legend>
+        <label for="search-female">
+          {{ female }}
+          <input type="checkbox" id="search-female" name="search-gender" data-gender="female">
+        </label>
+        <label for="search-male">
+          {{ male }}
+          <input type="checkbox" id="search-male" name="search-gender" data-gender="male" checked>
+        </label>
+      </fieldset>
+      <button id="search">
+        <i class="material-icons">search</i>
+      </button>
+    </div>
   </article>
   <script>
     window.rendVars = {

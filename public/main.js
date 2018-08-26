@@ -60,6 +60,7 @@
       clearInterval(messageInterval)
       messageInterval = null
     }
+    socket.read()
   })
 
   $chatBox.addEventListener('click', () => {
@@ -123,6 +124,10 @@
         typingTimeout = null
       }
     }
+  })
+
+  socket.on('read', () => {
+    console.log('read')
   })
 
   socket.on('message', msg => {

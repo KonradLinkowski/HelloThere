@@ -46,6 +46,13 @@ class Socket {
   }
 
   /**
+   * Sends information that user read the message
+   */
+  read() {
+    this.socket.emit('read')
+  }
+
+  /**
    * Sends message to a current connected user
    * 
    * @param {string} message your message

@@ -90,6 +90,12 @@ body {
   margin: auto;
 }
 
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .hidden {
   display: none;
 }
