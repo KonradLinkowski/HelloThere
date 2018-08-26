@@ -24,7 +24,10 @@ body {
 }
 
 .chat-info {
-  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
   padding: 0 var(--chat-padding);
   background-color: var(--chat-color);
   color: white;
@@ -83,6 +86,87 @@ body {
 .message--right {
   background-color: var(--chat-color);
   color: white;
+}
+
+.message--system {
+  color: gray;
+  margin: auto;
+}
+
+.typing * {
+  position: relative;
+  animation-name: typing;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  animation-timing-function: ease-in-out;
+}
+
+.typing *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.typing *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typing {
+  0% {
+    top: 0px;
+  }
+  25% {
+    top: -5px;
+  }
+  50% {
+    top: 0px;
+  }
+  75% {
+    top: 5px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gen-fieldset {
+  padding: 10px;
+}
+
+.gen-label {
+  margin: 10px;
+  border-radius: 20px;
+  padding: 5px 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--chat-color);
+}
+
+.gen-box {
+  position: absolute;
+  visibility: hidden;
+}
+
+.gen-box:checked + .gen-label {
+  background-color: var(--chat-color);
+  color: white;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.unselectable {
+  user-select: none;
 }
 
 .hidden {
