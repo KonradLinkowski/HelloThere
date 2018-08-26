@@ -32,6 +32,9 @@ function handleConnection(socket) {
     if ((data.myGender === 'male' || data.myGender === 'female')
       && data.searchFor.length >= 1 && data.searchFor.length <= 2) {
       users.push(new User(socket, data.myGender, data.searchFor))
+      chat.emit('server-info', {
+        online: users.length
+      })
       fn(true)
     } else {
       fn(false)
@@ -62,6 +65,9 @@ function handleConnection(socket) {
     console.log(`${socket.id} left the room`)
     let room = Object.keys(socket.rooms)[1]
     chat.to(room).emit('user-left')
+    chat.emit('server-info', {
+      online: users.length
+    })
     socket.leave(room)
   })
 
@@ -100,6 +106,9 @@ function handleConnection(socket) {
     if (indexOf) users.splice(indexOf, 1)
     indexOf = chatQueue.indexOf(user)
     if (indexOf) chatQueue.splice(indexOf, 1)
+    chat.emit('server-info', {
+      online: users.length
+    })
   })
 }
 

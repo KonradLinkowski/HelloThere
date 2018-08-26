@@ -12,6 +12,8 @@
         $search = $actionBtn.querySelector('#action-search'),
         $stop =  $actionBtn.querySelector('#action-stop')
 
+  const $infoUsers = document.querySelector('#info-users')
+
   const socket = new Socket('/chat')
 
   const state = {
@@ -129,6 +131,10 @@
 
   socket.on('read', () => {
     console.log('read')
+  })
+
+  socket.on('server-info', data => {
+    $infoUsers.innerText = data.online
   })
 
   socket.on('message', msg => {
