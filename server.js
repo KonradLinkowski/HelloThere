@@ -69,6 +69,11 @@ function handleConnection(socket) {
       online: users.length
     })
     socket.leave(room)
+    const socketId = '/' + room.split('/').slice(-1)[0]
+    console.log(socketId)
+    const otherUser = users.find(u => u.socket.id === socketId)
+    if (user)
+      otherUser.socket.leave(room)
   })
 
   socket.on('typing', start => {
