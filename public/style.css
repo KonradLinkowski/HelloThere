@@ -96,7 +96,7 @@ body {
 .typing * {
   position: relative;
   animation-name: typing;
-  animation-duration: 2s;
+  animation-duration: 1.5s;
   animation-iteration-count: infinite;
   animation-play-state: running;
   animation-timing-function: ease-in-out;
@@ -116,19 +116,19 @@ body {
 
 @keyframes typing {
   0% {
-    top: 0px;
+    top: 0;
   }
   25% {
-    top: -5px;
+    top: 0;
   }
   50% {
-    top: 0px;
+    top: -5px;
   }
   75% {
-    top: 5px;
+    top: 0;
   }
   100% {
-    top: 0px;
+    top: 0;
   }
 }
 
