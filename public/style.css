@@ -96,6 +96,37 @@ body {
   align-items: center;
 }
 
+.gen-fieldset {
+  padding: 10px;
+}
+
+.gen-label {
+  margin: 10px;
+  border-radius: 20px;
+  padding: 5px 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--chat-color);
+}
+
+.gen-box {
+  position: absolute;
+  visibility: hidden;
+}
+
+.gen-box:checked + .gen-label {
+  background-color: var(--chat-color);
+  color: white;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.unselectable {
+  user-select: none;
+}
+
 .hidden {
   display: none;
 }

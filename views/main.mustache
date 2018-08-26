@@ -35,27 +35,19 @@
   </article>
   <article id="login-page" class="login-page">
     <div class="login-wrapper">
-      <fieldset>
+      <fieldset class="gen-fieldset">
         <legend>{{ whoAreYou }}</legend>
-        <label for="my-female">
-          {{ female }}
-          <input type="radio" id="my-female" name="my-gender" data-gender="female" checked>
-        </label>
-        <label for="my-male">
-          {{ male }}
-          <input type="radio" id="my-male" name="my-gender" data-gender="male">
-        </label>
+        <input type="radio" id="my-female" name="my-gender" data-gender="female" class="gen-box" checked>
+        <label for="my-female" class="gen-label unselectable clickable">{{ female }}</label>
+        <input type="radio" id="my-male" name="my-gender" data-gender="male" class="gen-box">
+        <label for="my-male" class="gen-label unselectable clickable">{{ male }}</label>
       </fieldset>
-      <fieldset>
+      <fieldset class="gen-fieldset">
         <legend>{{ whoAreYouLookingFor }}</legend>
-        <label for="search-female">
-          {{ female }}
-          <input type="checkbox" id="search-female" name="search-gender" data-gender="female">
-        </label>
-        <label for="search-male">
-          {{ male }}
-          <input type="checkbox" id="search-male" name="search-gender" data-gender="male" checked>
-        </label>
+        <input type="checkbox" id="search-female" name="search-gender" data-gender="female" checked class="gen-box">
+        <label for="search-female" class="gen-label unselectable clickable">{{ female }}</label>
+        <input type="checkbox" id="search-male" name="search-gender" data-gender="male" checked class="gen-box">
+        <label for="search-male" class="gen-label unselectable clickable">{{ male }}</label>
       </fieldset>
       <button id="search">
         <i class="material-icons">search</i>
