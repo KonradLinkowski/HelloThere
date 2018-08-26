@@ -24,7 +24,10 @@ body {
 }
 
 .chat-info {
-  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
   padding: 0 var(--chat-padding);
   background-color: var(--chat-color);
   color: white;
