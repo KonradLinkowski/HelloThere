@@ -114,6 +114,7 @@
     if (start) {
       if (typingTimeout) clearTimeout(typingTimeout)
       $typingInfo.setActive(true)
+      $chatBox.scrollTop = $chatBox.scrollHeight
       typingTimeout = setTimeout(() => {
         $typingInfo.setActive(false)
       }, 5000)
