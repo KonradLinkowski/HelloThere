@@ -85,6 +85,11 @@ body {
   color: white;
 }
 
+.message--system {
+  color: gray;
+  margin: auto;
+}
+
 .hidden {
   display: none;
 }

@@ -105,14 +105,8 @@
     console.log('joined')
     currentState.set(state.connected)
     $chatInput.focus()
-    printMessage({
-      msg: `${window.rendVars.connectedMessage} ${data.gender}`,
-      error: false
-    }, false)
-    printMessage({
-      msg: window.rendVars.sayHello,
-      error: false
-    }, false)
+    printSystemMessage(`${window.rendVars.connectedMessage} ${data.gender}`)
+    printSystemMessage(window.rendVars.sayHello)
   })
 
   socket.on('typing', start => {
@@ -144,11 +138,16 @@
   })
   socket.on('user-left', () => {
     console.log('user left')
-    socket.leave()
     currentState.set(state.disconnected)
+    printSystemMessage('User left')
     // $loginPage.setActive(true)
     // $chatPage.setActive(false)
   })
+
+  function printSystemMessage(msg) {
+    $chatBox.insertBefore(createSystemMessageElement(msg), $typingInfo)
+    $chatBox.scrollTop = $chatBox.scrollHeight
+  }
 
   function printMessage(data, you) {
     if (data.error) {
@@ -199,6 +198,17 @@
     let mes = document.createElement('span')
     mes.classList.add('message')
     mes.classList.add(you ? 'message--right' : 'message--left')
+    mes.innerText = message
+    wrapper.appendChild(mes)
+    return wrapper
+  }
+
+  function createSystemMessageElement(message) {
+    let wrapper = document.createElement('div')
+    wrapper.classList.add('message-wrapper')
+    let mes = document.createElement('span')
+    mes.classList.add('message')
+    mes.classList.add('message--system')
     mes.innerText = message
     wrapper.appendChild(mes)
     return wrapper
