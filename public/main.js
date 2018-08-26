@@ -184,8 +184,8 @@
     for (let e of checkboxes) {
       searchFor.push(e.dataset.gender)
     }
-    socket.login(myGender, searchFor, succes => {
-      if (succes) {
+    socket.login(myGender, searchFor, success => {
+      if (success) {
         socket.search(true)
         currentState.set(state.searching)
         $loginPage.setActive(false)
