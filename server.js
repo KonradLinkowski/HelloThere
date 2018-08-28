@@ -64,12 +64,13 @@ function handleConnection(socket) {
   socket.on('leave', data => {
     console.log(`${socket.id} left the room`)
     let room = Object.keys(socket.rooms)[1]
+    if (!room) return
     chat.to(room).emit('user-left')
     chat.emit('server-info', {
       online: users.length
     })
     socket.leave(room)
-    const socketId = '/' + room.split('/').slice(-1)[0]
+    const socketId = room.split('|')[1]
     console.log(socketId)
     const otherUser = users.find(u => u.socket.id === socketId)
     if (otherUser)
@@ -136,7 +137,7 @@ function matchUsers() {
     let rand = Math.floor(Math.random() * availableUsers.length)
     // connect with random user from availables
     let otherUser = availableUsers[rand]
-    let roomName = thisUser.socket.id + otherUser.socket.id
+    let roomName = thisUser.socket.id + '|' + otherUser.socket.id
     thisUser.socket.join(roomName)
     otherUser.socket.join(roomName)
     thisUser.socket.emit('join', { gender: otherUser.gender })
