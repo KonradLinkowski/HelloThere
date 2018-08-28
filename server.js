@@ -72,7 +72,7 @@ function handleConnection(socket) {
     const socketId = '/' + room.split('/').slice(-1)[0]
     console.log(socketId)
     const otherUser = users.find(u => u.socket.id === socketId)
-    if (user)
+    if (otherUser)
       otherUser.socket.leave(room)
   })
 

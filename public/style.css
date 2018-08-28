@@ -49,10 +49,21 @@ body {
 
 .buttons-wrapper {
   display: flex;
+  align-items: stretch;
+  border-top-style: inset;
+  border-top-color: grey;
+  border-top-width: 2px;
+  height: 3rem;
 }
 
 .chat-input {
   width: 100%;
+  font-size: 0.8rem;
+  border: none;
+}
+
+.chat-input:focus {
+  outline-width: 0;
 }
 
 .message-wrapper {
@@ -159,6 +170,17 @@ body {
 .gen-box:checked + .gen-label {
   background-color: var(--chat-color);
   color: white;
+}
+
+.btn {
+  background-color: white;
+  border: none;
+  box-shadow: none;
+  padding: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .clickable {

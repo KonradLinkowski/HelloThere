@@ -7,6 +7,7 @@
   const $searchBtn = document.querySelector('#search')
   const $logoutBtn = document.querySelector('#chat-logout')
   const $typingInfo = document.querySelector('#typing-info')
+  const $searchingInfo = document.querySelector('#searching-info')
   const $actionBtn = document.querySelector('#chat-action')
   const $leave = $actionBtn.querySelector('#action-leave'),
         $search = $actionBtn.querySelector('#action-search'),
@@ -32,6 +33,8 @@
         $sendBtn.disabled = true
         $chatInput.disabled = true
         $logoutBtn.disabled = true
+        $chatBox.insertBefore($searchingInfo, $typingInfo)
+        $searchingInfo.setActive(true)
       } else if (value == state.connected) {
         $stop.setActive(false)
         $leave.setActive(true)
@@ -40,7 +43,9 @@
         $chatInput.disabled = false
         $logoutBtn.disabled = true
         $chatBox.innerHTML = ''
+        $chatBox.appendChild($searchingInfo)
         $chatBox.appendChild($typingInfo)
+        $searchingInfo.setActive(false)
       } else {
         $stop.setActive(false)
         $leave.setActive(false)
@@ -48,6 +53,8 @@
         $sendBtn.disabled = true
         $chatInput.disabled = true
         $logoutBtn.disabled = false
+        $searchingInfo.setActive(false)
+        $typingInfo.setActive(false)
       }
     },
     get: () => st
