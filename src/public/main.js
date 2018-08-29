@@ -9,9 +9,9 @@
   const $typingInfo = document.querySelector('#typing-info')
   const $searchingInfo = document.querySelector('#searching-info')
   const $actionBtn = document.querySelector('#chat-action')
-  const $leave = $actionBtn.querySelector('#action-leave'),
-        $search = $actionBtn.querySelector('#action-search'),
-        $stop =  $actionBtn.querySelector('#action-stop')
+  const $leave = $actionBtn.querySelector('#action-leave')
+  const $search = $actionBtn.querySelector('#action-search')
+  const $stop =  $actionBtn.querySelector('#action-stop')
 
   const $infoUsers = document.querySelector('#info-users')
 
@@ -25,7 +25,7 @@
   let currentState = {
     st: state.disconnected,
     set: value => {
-      st = value
+      this.st = value
       if (value == state.searching) {
         $stop.setActive(true)
         $leave.setActive(false)
@@ -57,7 +57,7 @@
         $typingInfo.setActive(false)
       }
     },
-    get: () => st
+    get: () => this.st
   }
 
   let typingTimeout = null

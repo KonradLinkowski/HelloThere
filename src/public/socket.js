@@ -1,7 +1,8 @@
 class Socket {
+
   /**
    * Creates new socket
-   * 
+   *
    * @param {string} namespace where to connect
    */
   constructor (namespace) {

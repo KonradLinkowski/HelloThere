@@ -50,10 +50,13 @@ function handleConnection(socket) {
 
   socket.on('search', data => {
     if (data === true) {
-      console.log(`${socket.id} is looking for someone`)
       const thisUser = users.find(user => user.socket.id == socket.id)
-      if (thisUser)
+      if (thisUser) {
         chatQueue.push(thisUser)
+        console.log(`${socket.id} (${thisUser.gender}) is looking for ${thisUser.searchFor}`)
+      } else {
+        console.log('no such user')
+      }
     } else {
       console.log(`${socket.id} stopped looking for someone`)
       const thisUser = users.find(user => user.socket.id == socket.id)
@@ -64,12 +67,13 @@ function handleConnection(socket) {
   socket.on('leave', data => {
     console.log(`${socket.id} left the room`)
     let room = Object.keys(socket.rooms)[1]
+    if (!room) return
     chat.to(room).emit('user-left')
     chat.emit('server-info', {
       online: users.length
     })
     socket.leave(room)
-    const socketId = '/' + room.split('/').slice(-1)[0]
+    const socketId = room.split('|')[1]
     console.log(socketId)
     const otherUser = users.find(u => u.socket.id === socketId)
     if (otherUser)
@@ -99,18 +103,20 @@ function handleConnection(socket) {
 
   socket.on('disconnecting', data => {
     console.log(`${socket.id} is disconnecting`)
-    let room = Object.keys(socket.rooms)[1]
+    const user = users.find(user => user.socket.id == socket.id)
+    if (!user) return
+    const room = Object.keys(socket.rooms)[1]
     chat.to(room).emit('user-left')
   })
 
   socket.on('disconnect', data => {
     console.log(`${socket.id} disconnected`)
-    let user = users.find(user => user.socket.id == socket.id)
+    const user = users.find(user => user.socket.id == socket.id)
     if (!user) return
     let indexOf = users.indexOf(user)
-    if (indexOf) users.splice(indexOf, 1)
+    if (indexOf != -1) users.splice(indexOf, 1)
     indexOf = chatQueue.indexOf(user)
-    if (indexOf) chatQueue.splice(indexOf, 1)
+    if (indexOf != -1) chatQueue.splice(indexOf, 1)
     chat.emit('server-info', {
       online: users.length
     })
@@ -136,7 +142,7 @@ function matchUsers() {
     let rand = Math.floor(Math.random() * availableUsers.length)
     // connect with random user from availables
     let otherUser = availableUsers[rand]
-    let roomName = thisUser.socket.id + otherUser.socket.id
+    let roomName = thisUser.socket.id + '|' + otherUser.socket.id
     thisUser.socket.join(roomName)
     otherUser.socket.join(roomName)
     thisUser.socket.emit('join', { gender: otherUser.gender })
