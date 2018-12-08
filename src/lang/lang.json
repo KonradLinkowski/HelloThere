@@ -34,5 +34,13 @@
     "sayHello": {
         "pl": "Przywitaj się :)",
         "en": "Say hello :)"
+    },
+    "usersOnline": {
+        "en": "Users online",
+        "pl": "Użytkowników online"
+    },
+    "chattingWith": {
+        "en": "Chatting with",
+        "pl": "Piszesz z"
     }
 }

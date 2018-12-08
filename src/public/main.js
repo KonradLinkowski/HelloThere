@@ -7,10 +7,13 @@
   const $searchBtn = document.querySelector('#search')
   const $logoutBtn = document.querySelector('#chat-logout')
   const $typingInfo = document.querySelector('#typing-info')
+  const $searchingInfo = document.querySelector('#searching-info')
   const $actionBtn = document.querySelector('#chat-action')
-  const $leave = $actionBtn.querySelector('#action-leave'),
-        $search = $actionBtn.querySelector('#action-search'),
-        $stop =  $actionBtn.querySelector('#action-stop')
+  const $leave = $actionBtn.querySelector('#action-leave')
+  const $search = $actionBtn.querySelector('#action-search')
+  const $stop =  $actionBtn.querySelector('#action-stop')
+
+  const $infoUsers = document.querySelector('#info-users')
 
   const socket = new Socket('/chat')
 
@@ -22,7 +25,7 @@
   let currentState = {
     st: state.disconnected,
     set: value => {
-      st = value
+      this.st = value
       if (value == state.searching) {
         $stop.setActive(true)
         $leave.setActive(false)
@@ -30,6 +33,8 @@
         $sendBtn.disabled = true
         $chatInput.disabled = true
         $logoutBtn.disabled = true
+        $chatBox.insertBefore($searchingInfo, $typingInfo)
+        $searchingInfo.setActive(true)
       } else if (value == state.connected) {
         $stop.setActive(false)
         $leave.setActive(true)
@@ -38,7 +43,9 @@
         $chatInput.disabled = false
         $logoutBtn.disabled = true
         $chatBox.innerHTML = ''
+        $chatBox.appendChild($searchingInfo)
         $chatBox.appendChild($typingInfo)
+        $searchingInfo.setActive(false)
       } else {
         $stop.setActive(false)
         $leave.setActive(false)
@@ -46,9 +53,11 @@
         $sendBtn.disabled = true
         $chatInput.disabled = true
         $logoutBtn.disabled = false
+        $searchingInfo.setActive(false)
+        $typingInfo.setActive(false)
       }
     },
-    get: () => st
+    get: () => this.st
   }
 
   let typingTimeout = null
@@ -106,6 +115,7 @@
     console.log('joined')
     currentState.set(state.connected)
     $chatInput.focus()
+<<<<<<< HEAD:public/main.js
     printMessage({
       msg: `${window.rendVars.connectedMessage} ${data.gender}`,
       error: false
@@ -114,12 +124,17 @@
       msg: window.rendVars.sayHello,
       error: false
     }, false, true)
+=======
+    printSystemMessage(`${window.rendVars.connectedMessage} ${data.gender}`)
+    printSystemMessage(window.rendVars.sayHello)
+>>>>>>> dev:src/public/main.js
   })
 
   socket.on('typing', start => {
     if (start) {
       if (typingTimeout) clearTimeout(typingTimeout)
       $typingInfo.setActive(true)
+      $chatBox.scrollTop = $chatBox.scrollHeight
       typingTimeout = setTimeout(() => {
         $typingInfo.setActive(false)
       }, 5000)
@@ -136,6 +151,10 @@
     console.log('read')
   })
 
+  socket.on('server-info', data => {
+    $infoUsers.innerText = data.online
+  })
+
   socket.on('message', msg => {
     if (typingTimeout) {
       clearTimeout(typingTimeout)
@@ -149,13 +168,22 @@
   })
   socket.on('user-left', () => {
     console.log('user left')
-    socket.leave()
     currentState.set(state.disconnected)
+    printSystemMessage('User left')
     // $loginPage.setActive(true)
     // $chatPage.setActive(false)
   })
 
+<<<<<<< HEAD:public/main.js
   function printMessage(data, you, system = false) {
+=======
+  function printSystemMessage(msg) {
+    $chatBox.insertBefore(createSystemMessageElement(msg), $typingInfo)
+    $chatBox.scrollTop = $chatBox.scrollHeight
+  }
+
+  function printMessage(data, you) {
+>>>>>>> dev:src/public/main.js
     if (data.error) {
       return
     }
@@ -182,8 +210,8 @@
     for (let e of checkboxes) {
       searchFor.push(e.dataset.gender)
     }
-    socket.login(myGender, searchFor, succes => {
-      if (succes) {
+    socket.login(myGender, searchFor, success => {
+      if (success) {
         socket.search(true)
         currentState.set(state.searching)
         $loginPage.setActive(false)
@@ -217,7 +245,12 @@
     let wrapper = document.createElement('div')
     wrapper.classList.add('message-wrapper')
     let mes = document.createElement('span')
+<<<<<<< HEAD:public/main.js
     mes.classList.add('message-system')
+=======
+    mes.classList.add('message')
+    mes.classList.add('message--system')
+>>>>>>> dev:src/public/main.js
     mes.innerText = message
     wrapper.appendChild(mes)
     return wrapper

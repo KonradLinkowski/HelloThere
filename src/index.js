@@ -29,7 +29,8 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
   res.render('main', {
-    userCount: socket.getUserCount(),
+    chattingWith: lang.chattingWith[req.locale],
+    usersOnline: lang.usersOnline[req.locale],
     whoAreYou: lang.whoAreYou[req.locale],
     whoAreYouLookingFor: lang.whoAreYouLookingFor[req.locale],
     female: lang.female[req.locale],

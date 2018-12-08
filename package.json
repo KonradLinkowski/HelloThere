@@ -4,8 +4,8 @@
   "description": "Random chat service.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "test": "mocha"
   },
   "keywords": [
     "chat",
@@ -19,5 +19,9 @@
     "mustache": "^2.3.1",
     "mustache-express": "^1.2.7",
     "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "mocha": "^5.2.0"
   }
 }
