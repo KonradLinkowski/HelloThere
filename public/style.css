@@ -5,6 +5,7 @@
 }
 
 :root {
+  --dark-color: #1d2129;
   --chat-color: lightsalmon;
   --chat-padding: 5%;
 }
@@ -86,13 +87,18 @@ body {
 
 .message--right {
   background-color: var(--chat-color);
-  color: white;
+  color: #e9ebee;
 }
 
 .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.--dark-theme {
+  background-color: var(--dark-color);
+  color: #e9ebee;
 }
 
 .hidden {
