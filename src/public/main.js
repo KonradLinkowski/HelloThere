@@ -140,8 +140,8 @@
     console.log('read')
   })
 
-  socket.on('server-info', data => {
-    $infoUsers.innerText = data.online
+  socket.on('ping', ({ usersOnline }, cb) => {
+    $infoUsers.innerText = usersOnline
   })
 
   socket.on('message', msg => {

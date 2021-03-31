@@ -97,7 +97,14 @@ function handleConnection(socket) {
     if (usersIndex != -1) users.splice(usersIndex, 1)
     const queueIndex = chatQueue.indexOf(user)
     if (queueIndex != -1) chatQueue.splice(queueIndex, 1)
+    clearInterval(user.interval)
   })
+
+  socket.interval = setInterval(() => {
+    chat.to(socket.id).emit('ping', {
+      usersOnline: users.length,
+    })
+  }, 5000)
 
   function bind(event, validators, handler) {
     socket.on(event, (data, cb) => {
