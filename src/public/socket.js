@@ -12,14 +12,14 @@ class Socket {
   /**
    * Logs in new user
    * 
-   * @param {string} myGender male or female
+   * @param {string} gender male or female
    * @param {string[]} searchFor array of male or female
    * @param {function} cb what to do when server will log user in
    */
-  login(myGender, searchFor, cb) {
+  login(gender, searchFor, cb) {
     this.socket.emit('login', {
-      myGender: myGender,
-      searchFor: searchFor
+      gender,
+      searchFor
     }, cb)
   }
 

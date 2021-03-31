@@ -168,11 +168,8 @@
     $chatBox.scrollTop = $chatBox.scrollHeight
   }
 
-  function printMessage(data, you) {
-    if (data.error) {
-      return
-    }
-    $chatBox.insertBefore(createMessageElement(data.msg, you), $typingInfo)
+  function printMessage(msg, you) {
+    $chatBox.insertBefore(createMessageElement(msg, you), $typingInfo)
     $chatBox.scrollTop = $chatBox.scrollHeight
   }
 
@@ -185,13 +182,13 @@
   }
 
   function login() {
-    const myGender = document.querySelector('input[name=my-gender]:checked').dataset.gender
+    const gender = document.querySelector('input[name=my-gender]:checked').dataset.gender
     const checkboxes = document.querySelectorAll('input[name=search-gender]:checked')
     const searchFor = []
     for (let e of checkboxes) {
       searchFor.push(e.dataset.gender)
     }
-    socket.login(myGender, searchFor, success => {
+    socket.login(gender, searchFor, success => {
       if (success) {
         socket.search(true)
         currentState.set(state.searching)
